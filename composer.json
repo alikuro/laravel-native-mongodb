@@ -1,6 +1,6 @@
 {
     "name": "alikuro/laravel-native-mongodb",
-    "description": "Hallo composer!",
+    "description": "A Native mongo connection with PHP MongoDB Driver Manager.",
     "authors": [
         {
             "name": "Muhamad Ali Kuro",
