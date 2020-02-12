@@ -1,0 +1,37 @@
+{
+    "name": "alikuro/laravel-native-mongodb",
+    "description": "Hallo composer!",
+    "authors": [
+        {
+            "name": "Muhamad Ali Kuro",
+            "homepage": "http://alikuro.com"
+        }
+    ],
+    "type": "library",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.2.24"
+    },
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Alikuro\\Mongodb\\": "src/"
+        },
+        "files": [
+            "src/Alikuro/Mongodb/MongodbDriver.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alikuro\\Mongodb\\MongodbServiceProvider"
+            ],
+            "aliases": {
+                "Xmongo": "Alikuro\\Mongodb\\MongodbFacade"
+            }
+        },
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
