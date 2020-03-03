@@ -12,7 +12,7 @@ class Query {
     private $collection = '';
 
     public function __construct() {
-        $this->connection = resolve('Manager');
+        $this->connection = resolve('Alikuro\Mongodb\Manager');
         $this->config = $this->connection->get('config');
         $this->manager = $this->connection->get('manager');
         $this->db = $this->connection->get('db');
