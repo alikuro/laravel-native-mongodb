@@ -73,6 +73,25 @@ if (! function_exists('MongoDate') ) {
 
         if( is_array($data) || is_object($data) ) {
             $pass = true;
+            if(is_object($data)){
+                if(isset($data->sec)){
+                    if(!$tomongodate){ $data = date("Y-m-d H:i:s", $data->sec); $pass = false; }
+                }
+                try{
+                    $_tmp = (String)$data;
+                    if(is_numeric($_tmp) && (strlen($_tmp) == 13 || strlen($_tmp) == 12 || strlen($_tmp) == 11)){
+                        if(!$tomongodate){
+                            $data = date("Y-m-d H:i:s", strtotime((new \MongoDB\BSON\UTCDateTime($_tmp))->toDateTime()->format(DATE_RSS).' UTC'));
+                            $pass = false;
+                        }
+                    }
+                } catch (Exception $e) {;}
+                if($pass){
+                    $_tmp = json_decode( json_encode( $data ), true );
+                    if( isset($_tmp['$date']) ) { $data = $_tmp; }
+                }
+            }
+
             if( is_array($data) ) {
                 if( isset($data['sec']) ) {
                     if(!$tomongodate){ $data = date("Y-m-d H:i:s", $data['sec']); $pass = false; }
@@ -90,20 +109,6 @@ if (! function_exists('MongoDate') ) {
                         } catch (Exception $e) {;}
                     }
                 }
-            }
-            if(is_object($data)){
-                if(isset($data->sec)){
-                    if(!$tomongodate){ $data = date("Y-m-d H:i:s", $data->sec); $pass = false; }
-                }
-                try{
-                    $_tmp = (String)$data;
-                    if(is_numeric($_tmp) && (strlen($_tmp) == 13 || strlen($_tmp) == 12 || strlen($_tmp) == 11)){
-                        if(!$tomongodate){
-                            $data = date("Y-m-d H:i:s", strtotime((new \MongoDB\BSON\UTCDateTime($_tmp))->toDateTime()->format(DATE_RSS).' UTC'));
-                            $pass = false;
-                        }
-                    }
-                } catch (Exception $e) {;}
             }
 
             if($pass){
