@@ -107,6 +107,7 @@ class Query {
      */
     public function count($filter=[],$with_err=false){
         $rows = 0;
+        $filter = !$filter ? new class{} : $filter;
         try {
             if(!empty($this->collection)){
                 $command = MongoDriverCommand(["count" => $this->collection, "query" => $filter]);
