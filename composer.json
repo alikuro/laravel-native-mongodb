@@ -16,7 +16,10 @@
     "autoload": {
         "psr-4": {
             "Alikuro\\Mongodb\\": "src/"
-        }
+        },
+        "files": [
+            "src/MongodbDriver.php"
+        ]
     },
     "extra": {
         "branch-alias": {
