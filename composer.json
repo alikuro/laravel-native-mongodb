@@ -1,37 +1,26 @@
 {
-    "name": "alikuro/laravel-native-mongodb",
+    "name": "alikuro/xmongodb",
     "description": "A Native mongo connection with PHP MongoDB Driver Manager.",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Muhamad Ali Kuro",
             "homepage": "http://alikuro.com"
         }
     ],
-    "type": "library",
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.2.24"
     },
-    "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
             "Alikuro\\Mongodb\\": "src/"
-        },
-        "files": [
-            "src/Alikuro/Mongodb/MongodbDriver.php"
-        ]
+        }
     },
     "extra": {
-        "laravel": {
-            "providers": [
-                "Alikuro\\Mongodb\\MongodbServiceProvider"
-            ],
-            "aliases": {
-                "Xmongo": "Alikuro\\Mongodb\\MongodbFacade"
-            }
-        },
         "branch-alias": {
-            "dev-master": "1.2.x-dev"
+            "dev-master": "2.1.x-dev"
         }
     }
 }
