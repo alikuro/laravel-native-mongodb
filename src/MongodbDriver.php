@@ -85,7 +85,7 @@ if (! function_exists('MongoDate') ) {
                             $pass = false;
                         }
                     }
-                } catch (Exception $e) {;}
+                } catch (\Exception $e) {;} catch (\Throwable $e) {;}
                 if($pass){
                     $_tmp = json_decode( json_encode( $data ), true );
                     if( isset($_tmp['$date']) ) { $data = $_tmp; }
@@ -101,12 +101,12 @@ if (! function_exists('MongoDate') ) {
                         try {
                             $data = date("Y-m-d H:i:s", strtotime((new \MongoDB\BSON\UTCDateTime($data['$date']['$numberLong']))->toDateTime()->format(DATE_RSS).' UTC'));
                             $pass = false;
-                        } catch (Exception $e) {;}
+                        } catch (\Exception $e) {;} catch (\Throwable $e) {;}
                     }elseif( is_numeric( $data['$date'] ) && !$tomongodate ) {
                         try {
                             $data = date("Y-m-d H:i:s", strtotime((new \MongoDB\BSON\UTCDateTime($data['$date']))->toDateTime()->format(DATE_RSS).' UTC'));
                             $pass = false;
-                        } catch (Exception $e) {;}
+                        } catch (\Exception $e) {;} catch (\Throwable $e) {;}
                     }
                 }
             }
@@ -128,12 +128,12 @@ if (! function_exists('MongoDate') ) {
                                 if(is_object($data)){ $data->{$key} = new \MongoDB\BSON\UTCDateTime(strtotime($value)*1000); }
                             }
                             if(is_numeric($value) && strlen($value) == 10){
-                                if(is_array($data)){try{ $data[$key] = new \MongoDB\BSON\UTCDateTime((int)$value*1000); } catch(Exception $e){;}}
-                                if(is_object($data)){try{ $data->{$key} = new \MongoDB\BSON\UTCDateTime((int)$value*1000); } catch(Exception $e){;}}
+                                if(is_array($data)){ try{ $data[$key] = new \MongoDB\BSON\UTCDateTime((int)$value*1000); } catch(\Exception $e){;} catch (\Throwable $e) {;} }
+                                if(is_object($data)){ try{ $data->{$key} = new \MongoDB\BSON\UTCDateTime((int)$value*1000); } catch(\Exception $e){;} catch (\Throwable $e) {;} }
                             }
                             if(is_numeric($value) && strlen($value) == 13){
-                                if(is_array($data)){try{ $data[$key] = new \MongoDB\BSON\UTCDateTime((int)$value); } catch(Exception $e){;}}
-                                if(is_object($data)){try{ $data->{$key} = new \MongoDB\BSON\UTCDateTime((int)$value); } catch(Exception $e){;}}
+                                if(is_array($data)){ try{ $data[$key] = new \MongoDB\BSON\UTCDateTime((int)$value); } catch(\Exception $e){;} catch (\Throwable $e) {;} }
+                                if(is_object($data)){ try{ $data->{$key} = new \MongoDB\BSON\UTCDateTime((int)$value); } catch(\Exception $e){;} catch (\Throwable $e) {;} }
                             }
                         }
                     }
@@ -143,8 +143,8 @@ if (! function_exists('MongoDate') ) {
             if(!empty($data)){
                 if($tomongodate){
                     if((bool)strtotime($data)){ $data = new \MongoDB\BSON\UTCDateTime(strtotime($data)*1000); }
-                    if(is_numeric($data) && strlen($data) == 10){ try{ $data = new \MongoDB\BSON\UTCDateTime((int)$data*1000); } catch(Exception $e){;} }
-                    if(is_numeric($data) && strlen($data) == 13){ try{ $data = new \MongoDB\BSON\UTCDateTime((int)$data); } catch(Exception $e){;} }
+                    if(is_numeric($data) && strlen($data) == 10){ try{ $data = new \MongoDB\BSON\UTCDateTime((int)$data*1000); } catch(\Exception $e){;} catch (\Throwable $e) {;} }
+                    if(is_numeric($data) && strlen($data) == 13){ try{ $data = new \MongoDB\BSON\UTCDateTime((int)$data); } catch(\Exception $e){;} catch (\Throwable $e) {;} }
                 }
             }
         }
